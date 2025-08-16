@@ -1,0 +1,10 @@
+--- src/ic.h.orig	2011-11-05 00:24:42.000000000 -0600
++++ src/ic.h	2025-08-15 07:48:56.219303721 -0600
+@@ -181,5 +181,7 @@
+ 
+ void    nabi_ic_process_string_conversion_reply(NabiIC* ic, const char* text);
+ 
++KeySym  nabi_ic_lookup_keysym(NabiIC* ic, XKeyEvent* event);
++
+ #endif /* _NABIIC_H_ */
+ /* vim: set ts=8 sw=4 sts=4 : */

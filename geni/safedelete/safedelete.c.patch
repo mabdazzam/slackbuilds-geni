@@ -1,0 +1,55 @@
+--- safedelete.c.orig	2001-05-16 09:06:11.000000000 -0400
++++ safedelete.c	2012-01-22 01:49:57.000000000 -0500
+@@ -47,6 +47,7 @@
+ char WorkBuf2[WORK_BUF_LEN];
+ char LogRec[WORK_BUF_LEN];
+ char FileName[FILE_NAME_LEN];
++char EscapedFileName[FILE_NAME_LEN];
+ char GrungedFileName[GRUNGED_FILE_LEN];
+ char SafeDelLog[DEL_LOG_LEN];
+ char SafeDir[SAFE_DIR_LEN];
+@@ -214,8 +215,10 @@
+     strcpy(WorkBuf, "/bin/rm ");
+     for(i=1; i < argc; i++)
+     {
+-      strcat(WorkBuf, argv[i]);
+-      strcat(WorkBuf, " ");
++      EscapeFileName(argv[i], EscapedFileName);
++      strcat(WorkBuf, "'");
++      strcat(WorkBuf, EscapedFileName);
++      strcat(WorkBuf, "' ");
+     }
+     ccode=system(WorkBuf);
+     return ccode;
+@@ -440,6 +443,8 @@
+        }
+      }
+ 
++     FileName[FILE_NAME_LEN-1] = '\0';
++
+ /* See if user specified '/' as the last character
+    and delete it
+ */
+@@ -896,9 +901,11 @@
+ 
+ /* Copy the file to the safedelete directory */
+ 
++       EscapeFileName(FileName, EscapedFileName);
++
+        if(! S_ISLNK(FileInfo.st_mode) && ! DontSave)
+        {
+-         sprintf(WorkBuf, "cp '%s' '%s'", FileName, SafeDir);
++         sprintf(WorkBuf, "cp '%s' '%s'", EscapedFileName, SafeDir);
+          system(WorkBuf);
+        }
+ 
+@@ -907,7 +914,8 @@
+        j=ParseFileName(FileName);
+        if(strcmp(CompressCmd, "none") != 0 && ! DontSave)
+        {
+-         sprintf(WorkBuf, "%s '%s/%s' 2>/dev/null", CompressCmd, SafeDir, FileName+j+1);
++         k=ParseFileName(EscapedFileName);
++         sprintf(WorkBuf, "%s '%s/%s' 2>/dev/null", CompressCmd, SafeDir, EscapedFileName+k+1);
+          system(WorkBuf);
+ 
+ /* Append the suffix, added by the compression command,

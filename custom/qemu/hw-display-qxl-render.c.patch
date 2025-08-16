@@ -1,0 +1,27 @@
+--- hw/display/qxl-render.c.orig	2024-12-10 16:46:36.000000000 -0700
++++ hw/display/qxl-render.c	2025-02-04 03:34:59.016771379 -0700
+@@ -222,6 +222,7 @@
+     uint32_t max_chunks = 32;
+     size_t offset = 0;
+     size_t bytes;
++    QXLPHYSICAL next_chunk_phys = 0;
+ 
+     for (;;) {
+         bytes = MIN(size - offset, chunk->data_size);
+@@ -230,8 +231,14 @@
+         if (offset == size) {
+             return;
+         }
+-        chunk = qxl_phys2virt(qxl, chunk->next_chunk, group_id,
+-                              sizeof(QXLDataChunk) + chunk->data_size);
++        next_chunk_phys = chunk->next_chunk;
++        chunk = qxl_phys2virt(qxl, next_chunk_phys, group_id,
++                              sizeof(QXLDataChunk));  // fist time, only get the next chunk's data size;
++        if (!chunk) {
++            return;
++        }
++        chunk = qxl_phys2virt(qxl, next_chunk_phys, group_id,
++                              sizeof(QXLDataChunk) + chunk->data_size); // second time, check data size and get data;
+         if (!chunk) {
+             return;
+         }

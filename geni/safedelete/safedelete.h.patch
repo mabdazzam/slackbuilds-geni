@@ -1,0 +1,10 @@
+--- safedelete.h.orig	2001-05-18 08:07:01.000000000 -0600
++++ safedelete.h	2025-08-15 07:14:56.108204106 -0600
+@@ -130,6 +130,7 @@
+ /* Global external subroutine prototypes */
+ 
+ extern int ParseFileName(char *FileName);
++extern void EscapeFileName(char *FileName, char *EscapedFileName);
+ extern int CheckPerms(char *DirName, char *FileName, char *Cmd, int MsgInd);
+ extern rcstruct *ReadRC(char *RCFileName, char *SectName);
+ extern int CheckFilePattern(char *FileName, compression_struct *cs);

@@ -1,0 +1,15 @@
+  All hangul precomposite glyphs are algorithmically generated
+the shape of hangul glyphs are imported from the Baekmuk TTF font, and
+heavily modified and hand-hinted.
+
+  All other parts are Public domain:
+
+Baekmuk is trademark owned by Jeoung Hwan KIM. http://www.font21.com
+Thanks to his donation of Korean ttf fonts.
+
+- ugulim12.bdf
+- ugulim10.bdf 
+
+
+- ugulim14.bdf 
+ under construction

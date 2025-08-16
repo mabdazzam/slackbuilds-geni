@@ -1,0 +1,36 @@
+--- parse.c.orig	1995-11-20 19:13:19.000000000 -0700
++++ parse.c	2025-08-15 07:27:09.315239907 -0600
+@@ -11,6 +11,8 @@
+                  returns: 29
+ */
+ 
++#include <string.h>
++
+ int  ParseFileName(FileName)
+   char *FileName;
+ {
+@@ -19,3 +21,24 @@
+   for(wrkptr=FileName+strlen(FileName); *wrkptr != '/'; wrkptr--);
+   return (int)(wrkptr-FileName);
+ }
++
++void EscapeFileName(FileName, EscapedFileName)
++  char *FileName;
++  char *EscapedFileName;
++{
++  char *s;
++  char *d;
++
++  for(s=FileName, d=EscapedFileName; *s!='\0'; ++s)
++  {
++    *d++ = *s;
++    if(*s == '\'')
++    {
++      *d++ = '"';
++      *d++ = '\'';
++      *d++ = '"';
++      *d++ = '\'';
++    }
++  }
++  *d = '\0';
++}

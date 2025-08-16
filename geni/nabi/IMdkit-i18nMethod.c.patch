@@ -1,0 +1,29 @@
+--- IMdkit/i18nMethod.c.orig	2011-11-05 00:24:42.000000000 -0600
++++ IMdkit/i18nMethod.c	2025-08-15 07:45:56.500294946 -0600
+@@ -81,13 +81,13 @@
+ 
+ TransportSW _TransR[] =
+ {
+-    {"X",               1, _Xi18nCheckXAddress},
++    {"X",               1, (Bool (*) ())_Xi18nCheckXAddress},
+ #ifdef TCPCONN
+-    {"tcp",             3, _Xi18nCheckTransAddress},
+-    {"local",           5, _Xi18nCheckTransAddress},
++    {"tcp",             3, (Bool (*) ())_Xi18nCheckTransAddress},
++    {"local",           5, (Bool (*) ())_Xi18nCheckTransAddress},
+ #endif
+ #ifdef DNETCONN
+-    {"decnet",          6, _Xi18nCheckTransAddress},
++    {"decnet",          6, (Bool (*) ())_Xi18nCheckTransAddress},
+ #endif
+     {(char *) NULL,     0, (Bool (*) ()) NULL}
+ };
+@@ -477,7 +477,7 @@
+             &&
+             address[_TransR[i].namelen] == '/')
+         {
+-            if (_TransR[i].checkAddr (i18n_core,
++            if (((Bool (*)(struct _Xi18nCore *, TransportSW *, char *))_TransR[i].checkAddr) (i18n_core,
+                                       &_TransR[i],
+                                       address + _TransR[i].namelen + 1) == True)
+             {

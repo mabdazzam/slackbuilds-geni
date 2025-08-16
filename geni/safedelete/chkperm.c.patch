@@ -1,0 +1,10 @@
+--- chkperm.c.orig	1995-11-18 13:31:33.000000000 -0700
++++ chkperm.c	2025-08-15 07:27:56.947242233 -0600
+@@ -20,6 +20,7 @@
+ #include <unistd.h>
+ #include <sys/stat.h>
+ #include <stdio.h>
++#include <string.h>
+ #include "safedelete.h"
+ 
+ int  CheckPerms(DirName, FileName, Cmd, MsgInd)

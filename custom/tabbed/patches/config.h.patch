@@ -1,0 +1,11 @@
+--- config.def.h	2024-03-19 05:23:17.000000000 -0600
++++ config.h	2025-03-29 08:29:44.028579881 -0600
+@@ -1,7 +1,7 @@
+ /* See LICENSE file for copyright and license details. */
+ 
+ /* appearance */
+-static const char font[]        = "monospace:size=9";
++static const char font[]        = "D2Coding:size=9";
+ static const char* normbgcolor  = "#222222";
+ static const char* normfgcolor  = "#cccccc";
+ static const char* selbgcolor   = "#555555";

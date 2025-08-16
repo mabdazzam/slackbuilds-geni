@@ -1,0 +1,11 @@
+--- src/server.h.orig	2011-11-05 00:24:42.000000000 -0600
++++ src/server.h	2025-08-15 07:52:06.995313036 -0600
+@@ -140,7 +140,7 @@
+ int         nabi_server_start           (NabiServer* server);
+ int         nabi_server_stop            (NabiServer *server);
+ 
+-Bool        nabi_server_is_running();
++Bool        nabi_server_is_running      (const char *name);
+ Bool        nabi_server_is_trigger_key  (NabiServer*  server,
+                                          KeySym       key,
+                                          unsigned int state);

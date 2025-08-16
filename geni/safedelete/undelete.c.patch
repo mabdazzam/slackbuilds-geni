@@ -1,0 +1,56 @@
+--- undelete.c.orig	2012-01-22 01:22:09.000000000 -0500
++++ undelete.c	2012-01-22 01:25:33.000000000 -0500
+@@ -208,6 +208,8 @@
+ {
+ char WorkBuf[WORK_BUF_LEN];
+ char WorkBuf2[WORK_BUF_LEN];
++char EscapedWorkBuf2[WORK_BUF_LEN];
++char EscapedFileName[FILE_NAME_LEN];
+ 
+ char *LogList, *palloc, *wrkptr, *wrkptr2;
+ 
+@@ -386,8 +388,11 @@
+ 
+       i=ParseFileName(LogList+sizeof(fileflag_struct));
+       sprintf(WorkBuf2, "%s/%s", SafeDir, LogList+sizeof(fileflag_struct)+i+1);
++      WorkBuf2[WORK_BUF_LEN-1] = '\0';
+       rename(WorkBuf, WorkBuf2);
+ 
++      EscapeFileName(WorkBuf2, EscapedWorkBuf2);
++
+ /* If this was a regular file and it was compressed
+    uncompress it.
+ */
+@@ -396,7 +401,7 @@
+       {
+         sprintf(WorkBuf, "%s%s", WorkBuf2, FileSuffix);
+         rename(WorkBuf2, WorkBuf);
+-        sprintf(WorkBuf, "%s '%s%s' > /dev/null 2>&1", UncompressCmd, WorkBuf2, FileSuffix);
++        sprintf(WorkBuf, "%s '%s%s' > /dev/null 2>&1", UncompressCmd, EscapedWorkBuf2, FileSuffix);
+         system(WorkBuf);
+       }
+ 
+@@ -407,18 +412,14 @@
+       if(S_ISREG(Mode))
+       {
+         if(NewName == NULL)
+-        {
+-          sprintf(WorkBuf, "cp '%s' '%s' > /dev/null 2>&1", WorkBuf2,
+-		  LogList+sizeof(fileflag_struct));
+-          system(WorkBuf);
+           strcpy(FileName, LogList+sizeof(fileflag_struct));
+-        }
+         else
+-        {
+-          sprintf(WorkBuf, "cp '%s' '%s' > /dev/null 2>&1", WorkBuf2, NewName);
+-          system(WorkBuf);
+           strcpy(FileName, NewName);
+-        }
++
++	EscapeFileName(FileName, EscapedFileName);
++        sprintf(WorkBuf, "cp '%s' '%s' > /dev/null 2>&1", EscapedWorkBuf2,
++			EscapedFileName);
++        system(WorkBuf);
+ 
+ /* Reset the permissions, uid, gid, etc of
+    the new file.
