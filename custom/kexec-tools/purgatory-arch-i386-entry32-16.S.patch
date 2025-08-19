@@ -1,0 +1,14 @@
+--- purgatory/arch/i386/entry32-16.S.orig	2016-12-09 02:42:06.000000000 -0700
++++ purgatory/arch/i386/entry32-16.S	2024-06-17 07:06:18.613334460 -0600
+@@ -20,10 +20,10 @@
+ #undef i386	
+ 	.text
+ 	.globl entry16, entry16_regs
+-	.arch i386
+ 	.balign 16
+ entry16:
+ 	.code32
++	.arch i386
+ 	/* Compute where I am running at (assumes esp valid) */
+ 	call	1f
+ 1:	popl	%ebx

@@ -1,0 +1,14 @@
+--- purgatory/arch/i386/setup-x86.S.orig	2016-12-09 02:41:25.000000000 -0700
++++ purgatory/arch/i386/setup-x86.S	2024-06-17 07:06:29.678823426 -0600
+@@ -21,10 +21,10 @@
+ #undef i386
+ 
+ 	.text
+-	.arch	i386
+ 	.globl purgatory_start
+ purgatory_start:
+ 	.code32
++	.arch	i386
+ 
+ 	/* Load a gdt so I know what the segment registers are */
+ 	lgdt	%cs:gdt

@@ -1,0 +1,14 @@
+--- purgatory/arch/i386/entry32.S.orig	2010-07-29 03:22:16.000000000 -0600
++++ purgatory/arch/i386/entry32.S	2024-06-17 07:06:23.074531592 -0600
+@@ -20,10 +20,10 @@
+ #undef i386
+ 
+ 	.text
+-	.arch	i386
+ 	.globl entry32, entry32_regs
+ entry32:
+ 	.code32
++	.arch	i386
+ 
+ 	/* Setup a gdt that should that is generally usefully */
+ 	lgdt	%cs:gdt
