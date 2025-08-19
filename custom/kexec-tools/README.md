@@ -1,1 +1,1 @@
-[These patches](https://git.openembedded.org/meta-openembedded/tree/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/Fix-building-on-x86_64-with-binutils-2.41.patch) fix the message "Error: 64bit mode not supported on 'i386'".
+[These patches](https://git.openembedded.org/meta-openembedded/tree/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc/Fix-building-on-x86_64-with-binutils-2.41.patch) fix the message "Error: 64bit mode not supported on 'i386'" in version 2.0.21.
