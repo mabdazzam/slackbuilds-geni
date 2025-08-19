@@ -1,5 +1,5 @@
 #!/bin/sh
-custom=$(dirname $0)
+custom=$(dirname $(realpath $0))
 
 cleanup(){
 	rm -f $tmp
@@ -11,7 +11,7 @@ for i in $(find $custom -type d ! -name .git ! -empty -mindepth 1 -maxdepth 1 -p
 	p=$(find /var/lib/sbopkg/SBo-git -type d -name $i)
 	[ "$p" = "" ] && continue
 	patch=
-	for f in $(find $custom/$i -mindepth 1 -maxdepth 1 -printf "%f\n"); do
+	for f in $(find $custom/$i ! -name README.md -mindepth 1 -maxdepth 1 -printf "%f\n"); do
 		if [ -d $custom/$i/$f ]; then
 			if [ -d $p/$f ]; then
 				for g in $(find $custom/$i/$f -type f -mindepth 1 -maxdepth 1 -printf "%f\n"); do
