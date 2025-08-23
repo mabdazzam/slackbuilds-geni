@@ -1,8 +1,7 @@
 This custom SlackBuild script builds [bspwm](https://github.com/baskerville/bspwm) 0.9.10.
 
 ```bash
-sbopkg -i "bspwm lemonbar stalonetray dmenu xtitle sutils sxhkd xdo xautolock feh
-"
+sbopkg -i "bspwm lemonbar stalonetray dmenu xtitle sutils sxhkd xdo xautolock feh"
 ```
 
 * [bspwm](https://github.com/baskerville/bspwm): window manager
