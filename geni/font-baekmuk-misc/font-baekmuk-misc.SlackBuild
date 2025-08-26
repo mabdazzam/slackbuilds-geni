@@ -67,7 +67,7 @@ fi
 #-GENI
 [ $SRC != $PRGNAM-$VERSION ] && mv $SRC $PRGNAM-$VERSION
 cd $PRGNAM-$VERSION
-cp $CWD/COPYRIGHT* $CWD/README* .
+cp -a $CWD/COPYRIGHT* $CWD/README* .
 for i in $CWD/*.bdf.gz; do
   j=`basename $i | sed 's/\.bdf\.gz$//'`
   cp -v $i .
