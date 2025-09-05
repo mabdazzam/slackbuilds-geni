@@ -1,0 +1,11 @@
+--- src/interface/set_options.c.orig	2017-03-08 10:32:08.000000000 -0700
++++ src/interface/set_options.c	2025-09-05 13:04:44.493892648 -0600
+@@ -113,7 +113,7 @@
+ void cbsel_up_callback    	( Widget w, XtPointer client_data, XtPointer call_data );
+ void cbsel_down_callback  	( Widget w, XtPointer client_data, XtPointer call_data );
+ void cbsel_bottom_callback	( Widget w, XtPointer client_data, XtPointer call_data );
+-void expose_cbsel_cbar    	();
++void expose_cbsel_cbar    	( Widget w, XtPointer client_data, XExposeEvent *event, Boolean *continue_to_dispatch );
+ 
+ static void cbsel_cmap_move  	( Cmaplist **pp_cmlist, int src, int dest );
+ static void cmaps_set_current	( Cmaplist *cmlist );
