@@ -1,5 +1,10 @@
 #!/bin/sh
 custom=$(dirname $(realpath $0))
+[ -d "$CUSTOMSBOPKG_PATH" ] && custom="$CUSTOMSBOPKG_PATH"
+if [ ! -d "$custom/../custom" ]; then
+	echo "Please check customsbopkg repository"
+	exit
+fi
 
 cleanup(){
 	rm -f $tmp
