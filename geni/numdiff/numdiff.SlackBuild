@@ -88,6 +88,7 @@ if [ -f configure ]; then
     --mandir=/usr/local/man \
     --infodir=/usr/local/info \
     $DOCDIR
+  sed -i 's|/\* #undef HAVE_STDBOOL_H \*/|#define HAVE_STDBOOL_H 1|' config.h
   make
 else
   set -e
