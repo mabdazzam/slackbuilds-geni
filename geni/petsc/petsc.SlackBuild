@@ -25,7 +25,7 @@
 cd $(dirname $0) ; CWD=$(pwd)
 
 PRGNAM=petsc
-VERSION=${VERSION:-3.23.5}
+VERSION=${VERSION:-3.18.6}
 BUILD=${BUILD:-1}
 # https://cgit.ponce.cc/slackbuilds/commit/?id=ab151412335ba0a12a22822769b70d98870158ce
 # Removed from SlackBuilds
